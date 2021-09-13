@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #yarn
-/src/yarn.lock
+yarn.lock
 
 #test file
 /src/*.test.*
