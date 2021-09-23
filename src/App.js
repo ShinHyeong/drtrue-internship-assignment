@@ -1,9 +1,9 @@
-import './App.css';
 import React from "react"; 
-import ErrorMsg from "./ErrorMsg";
+import SiteInfo from "./SiteInfo";
+import "./App.css";
 
 function App() {
-  return <ErrorMsg />;
+  return <SiteInfo />;
 }
 
 export default App;
