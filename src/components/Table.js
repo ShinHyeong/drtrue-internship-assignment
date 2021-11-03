@@ -1,5 +1,6 @@
 import React from "react";
 import './Table.css';
+
 function Table({ table_data }) {
   return (
       <table className="content-table">
