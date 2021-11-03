@@ -3,6 +3,24 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../components/useInput";
 import oc from 'open-color';
+import { useUserDispatch, useUserState } from "../context/Users";
+
+const Aligner = styled.div`
+margin-top: 1rem;
+text-align: right;
+`;
+
+const StyledLink = styled(Link)`
+color: ${oc.gray[6]};
+&:hover {
+    color: ${oc.gray[7]};
+}
+`
+const RightAlignedLink = ({to, children}) => (
+<Aligner>
+    <StyledLink to={to}>{children}</StyledLink>
+</Aligner>
+);
 
 const InputContainer = styled.div`
   margin-top: 100px;
@@ -43,14 +61,15 @@ const Label = styled.div`
 `;
 
 const Input = styled.input`
-    width: 100%;
-    border: 1px solid ${oc.gray[3]};
-    outline: none;
-    border-radius: 0px;
-    line-height: 2.5rem;
-    font-size: 1.2rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 40px;
+  margin: 0 0 8px;
+  padding: 5px 39px 5px 11px;
+  border: solid 1px #dadada;
+  background: #fff;
+  box-sizing: border-box;
 `;
 
 const ErrorMessage = styled.div`
@@ -76,11 +95,13 @@ const [errorMessage, setErrorMessage] = useState({
   confirmPwdError: "",
 });
 const { idError, pwdError, confirmPwdError } = errorMessage;
+const dispatch = useUserDispatch();
 
 const inputRegexs = {
   idReg: /^[A-za-z0-9]{5,15}$/g,
   pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g,
 };
+
 const validationCheck = useCallback(
   (input, regex) => {
     let isValidate = false;
@@ -148,22 +169,33 @@ useEffect(() => {
   }
 }, [confirmPwd]);
 
+const {userList} = useUserState();
 const onSignUp = () => {
   if (!id || !pwd || !confirmPwd) {
-    alert("모든 값을 정확하게 입력해주세요");
+    alert("모든 값을 정확하게 입력해주십시오.");
     return;
   }
-
   if (idError) {
-    alert("아이디가 형식에 맞지 않습니다");
+    alert("아이디가 형식에 맞지 않습니다.");
     return;
   } else if (pwdError) {
-    alert("비밀번호가 형식에 맞지 않습니다");
+    alert("비밀번호가 형식에 맞지 않습니다.");
     return;
   } else if (confirmPwdError) {
     alert("비밀번호 확인이 일치하지 않습니다.");
     return;
   }
+
+  dispatch({
+    type: "CREATE_USER",
+    user: {
+      id,
+      pwd,
+    },
+  });
+
+  
+  console.log(userList);
 
   alert("회원 가입 완료");
   history.push("/");
@@ -184,10 +216,8 @@ const onSignUp = () => {
           ) : (
             ""
           )}
-      <InputButton type="submit" value="가입" onClick={onSignUp} />
-      <Link to="/">
-        <InputButton type="submit" value="로그인" />
-      </Link>
+      <InputButton type="submit" onClick={onSignUp}>가입</InputButton>
+      <RightAlignedLink to="/" style={{textDecoration: 'none'}}>로그인 화면으로</RightAlignedLink>
     </InputContainer>
     </>
   );

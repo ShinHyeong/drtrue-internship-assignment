@@ -1,14 +1,16 @@
-import React, {useContext} from "react";
-import { UserContext } from "../store/Users";
+import React from "react";
+import { useUserState } from "../context/Users";
+import SiteInfo from "../SiteInfo";
 
 const Home = () => {
-  const context = useContext(UserContext);
+  const { user } = useUserState();
+
   return (
     <div>
-      <h3>{context.userId}님 환영합니다!</h3>
-      <a href="/siteinfo">API 정보확인</a>
-   </div>
+      <h3>{user.userId}님 환영합니다.</h3>
+      <SiteInfo />
+    </div>
   );
-}
+};
 
 export default Home;

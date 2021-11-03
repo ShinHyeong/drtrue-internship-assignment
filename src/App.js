@@ -7,22 +7,20 @@ import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import NotFound from "./page/NotFound";
 import Home from "./page/Home";
-import UserContext from "./store/Users"
+import {useUserState} from "./context/Users"
 
 function App() {
-  const isLogin = false;
+  const { user } = useUserState();
 
   return (
   <div>
-    {isLogin ? (
-      <UserContext>
+    {user ? (
       <Switch>
         <Route exact path="/" component={Home} /> {/*로그인성공*/}
         <Route path="/siteinfo" component={SiteInfo} /> {/*API 정보 테이블*/}
         <Route path="/404" component={NotFound} />
         <Redirect from="*" to="/404" />
       </Switch>
-      </UserContext>
     ) : (
       <Router>
         <Switch>
