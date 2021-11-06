@@ -194,12 +194,10 @@ const onSignUp = () => {
     },
   });
 
-  
-  console.log(userList);
-
   alert("회원 가입 완료");
   history.push("/");
   onReset();
+  console.log(userList);
 };
 
   return (
