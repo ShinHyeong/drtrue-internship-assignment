@@ -82,7 +82,7 @@ const InputWithLabel = ({label, ...rest}) => (
 function Login() {
   const [id, onChangeId, setId] = useInput("");
   const [pwd, onChangePwd, setPwd] = useInput("");
-  const { userList } = useUserState();
+  const { user } = useUserState();
   const dispatch = useUserDispatch();
 
   const onReset = useCallback(() => {
@@ -103,8 +103,6 @@ function Login() {
 
     alert("로그인");
     onReset();
-
-    console.log(userList);
   };
 
 return (

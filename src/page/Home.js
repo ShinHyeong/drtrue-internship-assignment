@@ -10,34 +10,38 @@ margin-top: 1rem;
 text-align: right;
 `;
 
-const StyledLink = styled(Link)`
+const StyledText = styled.div`
 color: ${oc.gray[6]};
 &:hover {
     color: ${oc.gray[7]};
 }
+cursor: pointer;
 `
-const RightAlignedLink = ({to, children}) => (
+const RightAlignedButton = ({children}) => (
 <Aligner>
-    <StyledLink to={to}>{children}</StyledLink>
+    <StyledText>{children}</StyledText>
 </Aligner>
 );
 
 const Home = () => {
   const { user } = useUserState();
   const dispatch = useUserDispatch();
+  console.log(user);
+
   const onLogOut = () => {
-    alert("로그아웃 되었습니다.");
+
     dispatch({
       type: "LOGOUT",
     });
+
+    alert("로그아웃 되었습니다.");
+    console.log(user);
   };
-<RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
-        
-  
+
   return (
     <div>
       <h3>{user.userId}님 환영합니다.</h3>
-      <RightAlignedLink type="submit" style={{textDecoration: 'none'}} to="/" onClick={onLogOut}>로그아웃</RightAlignedLink>
+      <RightAlignedButton type="submit" onClick={onLogOut}>로그아웃</RightAlignedButton>
       <SiteInfo />
     </div>
   );
