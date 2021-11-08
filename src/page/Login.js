@@ -118,19 +118,19 @@ return (
           <div className="socialBox">
             <div className="kakao">
               <img className="kakaoLogo" src="img/kakao.png" />
-              <div className="kakaoText">카카오 계정으로 신규가입</div>
+              <div className="kakaoText">카카오 계정으로 로그인</div>
             </div>
             <div className="facebook">
               <img className="facebookLogo" src="img/facebook.png" />
-              <div className="facebookText">페이스북 계정으로 신규가입</div>
+              <div className="facebookText">페이스북 계정으로 로그인</div>
             </div>
             <div className="naver">
               <img className="naverLogo" src="img/naver.png" />
-              <div className="naverText">네이버 계정으로 신규가입</div>
+              <div className="naverText">네이버 계정으로 로그인</div>
             </div>
             <div className="instagram">
               <img className="instagramLogo" src="img/instagram.png" />
-              <div className="instagramText">인스타그램 계정으로 신규가입</div>
+              <div className="instagramText">인스타그램 계정으로 로그인</div>
             </div>
           </div>
           <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
