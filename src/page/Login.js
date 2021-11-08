@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useInput from "../components/useInput";
 import oc from 'open-color';
 import { useUserState, useUserDispatch } from "../context/Users";
+import './SocialBox.css';
 
 const Aligner = styled.div`
 margin-top: 1rem;
@@ -114,6 +115,24 @@ return (
           <InputWithLabel label="아이디" id="user_id" value={id} onChange={onChangeId} placeholder="아이디를 입력하시오" required/>
           <InputWithLabel label="비밀번호" id="user_pwd" value={pwd} onChange={onChangePwd} placeholder="비밀번호를 입력하시오" required/>
           <InputButton type="submit" onClick={onLogin}>로그인</InputButton>
+          <div className="socialBox">
+            <div className="kakao">
+              <img className="kakaoLogo" src="img/kakao.png" />
+              <div className="kakaoText">카카오 계정으로 신규가입</div>
+            </div>
+            <div className="facebook">
+              <img className="facebookLogo" src="img/facebook.png" />
+              <div className="facebookText">페이스북 계정으로 신규가입</div>
+            </div>
+            <div className="naver">
+              <img className="naverLogo" src="img/naver.png" />
+              <div className="naverText">네이버 계정으로 신규가입</div>
+            </div>
+            <div className="instagram">
+              <img className="instagramLogo" src="img/instagram.png" />
+              <div className="instagramText">인스타그램 계정으로 신규가입</div>
+            </div>
+          </div>
           <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
         </form>
       </InputContainer>

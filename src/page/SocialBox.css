@@ -1,0 +1,106 @@
+.socialBox {
+  margin-bottom: 30px;
+}
+.kakao {
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border-radius: 0;
+  cursor: pointer;
+  background-color: #feec34;
+}
+.kakaoLogo {
+  width: 24px;
+  height: 25px;
+}
+.kakaoText {
+  width: 300px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #525252;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+}    
+
+.facebook {
+  height: 49px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  background-color: #3a5897;
+  margin-bottom: 10px;
+}
+.facebookText {
+  padding-top: 12px;
+  width: 310px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+.facebookLogo {
+  padding-top: 10px;
+  width: 24px;
+  height: 25px;
+}
+.naver {
+  height: 49px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  background-color: #00bf18;
+  margin-bottom: 10px;
+}
+.naverText {
+  padding-top: 12px;
+  width: 310px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+.naverLogo {
+  padding-top: 10px;
+  width: 24px;
+  height: 25px;
+}
+.instagram {
+  height: 49px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  background-color: #d42c75;
+  margin-bottom: 10px;
+}
+.instagramText {
+  padding-top: 12px;
+  width: 310px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+.instagramLogo {
+  padding-top: 10px;
+  width: 28px;
+  height: 29px;
+}
