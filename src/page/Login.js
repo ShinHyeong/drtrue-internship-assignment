@@ -5,6 +5,7 @@ import useInput from "../components/useInput";
 import oc from 'open-color';
 import { useUserState, useUserDispatch } from "../context/Users";
 import './SocialBox.css';
+import KakaoLogin from "../components/KakaoLogin";
 
 const Aligner = styled.div`
 margin-top: 1rem;
@@ -118,7 +119,7 @@ return (
           <div className="socialBox">
             <div className="kakao">
               <img className="kakaoLogo" src="img/kakao.png" />
-              <div className="kakaoText">카카오 계정으로 로그인</div>
+              <div className="kakaoText" onClick={KakaoLogin}>카카오 계정으로 로그인</div>
             </div>
             <div className="facebook">
               <img className="facebookLogo" src="img/facebook.png" />
