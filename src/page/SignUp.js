@@ -214,7 +214,9 @@ const onSignUp = () => {
           ) : (
             ""
           )}
+      <form>
       <InputButton type="submit" onClick={onSignUp}>가입</InputButton>
+      </form>
       <RightAlignedLink to="/" style={{textDecoration: 'none'}}>로그인 화면으로</RightAlignedLink>
     </InputContainer>
     </>

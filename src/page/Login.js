@@ -5,7 +5,7 @@ import useInput from "../components/useInput";
 import oc from 'open-color';
 import { useUserState, useUserDispatch } from "../context/Users";
 import './SocialBox.css';
-import KakaoLogin from "../components/KakaoLogin";
+import KakaoLogin from "../components/kakaoLogin";
 
 const Aligner = styled.div`
 margin-top: 1rem;

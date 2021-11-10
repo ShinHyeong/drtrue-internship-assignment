@@ -9,8 +9,6 @@ ReactDOM.render(
     <UserProvider>
       <BrowserRouter>
         <App />
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script>Kakao.init("1d8e6af0be90ae122d1b4843cce8898f");</script>
       </BrowserRouter>
     </UserProvider>
   </React.StrictMode>,

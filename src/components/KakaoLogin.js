@@ -1,40 +1,38 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { Component } from "react";
 
-const {Kakao} = window;
-
-function KakaoLogin() {
+class KakaoLogin extends Component {
   
-  const history = useHistory();
-  const KAKAO_LOGIN_API_URL = "http://localhost:3000/";
-  const kakaoLoginClickHandler = () => {
-    Kakao.Auth.login({
-      success: function (authObj) {
-        fetch(`${KAKAO_LOGIN_API_URL}`, {
-          method: "POST",
-          body: JSON.stringify({
-            access_token: authObj.access_token,
-          }),
-        })
+    componentDidMount(){
+    const kakaoScript = document.createElement("script");
+    kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+    document.head.appendChild(kakaoScript);
 
-        .then(res => res.json())
-        .then(res => {
-          localStorage.setItem("Kakao_token", res.access_token);
-          if (res.access_token) {
-            alert("카카오 로그인")
-            history.push("/login");
-          }
-        })
-      },
-      fail: function(err) {
-        alert(JSON.stringify(err))
-      },
-    }); 
-  };
+    kakaoScript.onload = () => {
+      window.Kakao.init("1d8e6af0be90ae122d1b4843cce8898f");
+      window.Kakao.Auth.createLoginButton({
+        container: "kakao-login-btn",
+        success: (auth) => {
+          console.log("kakao 로그인 완료", auth);
+          window.Kakao.API.request({
+            url: "/v2/user/me",
+            success: (res) => {
+              console.log("Kakao 사용자 정보", res);
+            },
+            fail: (err) =>{
+              console.log(err);
+            },
+          });
+        },
+        fail: (err) => {
+          console.log(err);
+        },
+      });
+    };
+  }
 
-  return (
-    <div onClick={kakaoLoginClickHandler}></div>
-  )
+  render() {
+    return <div id="kakao-login-btn"></div>
+  }
 }
 
 export default KakaoLogin;

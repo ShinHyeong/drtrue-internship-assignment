@@ -23,6 +23,7 @@ const RightAlignedButton = ({children}) => (
 </Aligner>
 );
 
+
 const Home = () => {
   const { user } = useUserState();
   const dispatch = useUserDispatch();
@@ -41,8 +42,10 @@ const Home = () => {
   return (
     <div>
       <h3>{user.userId}님 환영합니다.</h3>
+      <form>
       <RightAlignedButton type="submit" onClick={onLogOut}>로그아웃</RightAlignedButton>
       <SiteInfo />
+      </form>
     </div>
   );
 };
