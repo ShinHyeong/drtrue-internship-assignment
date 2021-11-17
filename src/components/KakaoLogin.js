@@ -1,38 +1,50 @@
-import React, { Component } from "react";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import KaKaoLogin from 'react-kakao-login';
 
-class KakaoLogin extends Component {
-  
-    componentDidMount(){
-    const kakaoScript = document.createElement("script");
-    kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
-    document.head.appendChild(kakaoScript);
+//* STYLED_COMPONENTS
+const ButtoninnerText = styled.div`
+  font-size: 16px;
+  font-weight: 550;
+  color: #525252;
+  cursor: pointer;
+`;
 
-    kakaoScript.onload = () => {
-      window.Kakao.init("1d8e6af0be90ae122d1b4843cce8898f");
-      window.Kakao.Auth.createLoginButton({
-        container: "kakao-login-btn",
-        success: (auth) => {
-          console.log("kakao 로그인 완료", auth);
-          window.Kakao.API.request({
-            url: "/v2/user/me",
-            success: (res) => {
-              console.log("Kakao 사용자 정보", res);
-            },
-            fail: (err) =>{
-              console.log(err);
-            },
-          });
-        },
-        fail: (err) => {
-          console.log(err);
-        },
-      });
+const KakaoLogin = ({ socialLogin }) => {
+  //* FUNCTIONS
+  const responseKakao = (response) => {
+    const { id } = response.profile;
+    const { email } = response.profile.kakao_account;
+    const userData = {
+      oAuthId: id,
+      email,
     };
-  }
+    socialLogin(userData);
+  };
 
-  render() {
-    return <div id="kakao-login-btn"></div>
-  }
-}
+  //* RENDER
+  return (
+    <>
+      <KaKaoLogin
+        token="dbffe5ff113e509cae44af75348b8c55"
+        onSuccess={responseKakao}
+        // eslint-disable-next-line no-console
+        onFail={console.error}
+        // eslint-disable-next-line no-console
+        onLogout={console.info}
+      >
+        <ButtoninnerText>Login with Kakao</ButtoninnerText>
+      </KaKaoLogin>
+    </>
+  );
+};
 
+//* PROP_TYPES
+KakaoLogin.defaultProps = {
+  socialLogin: () => null,
+};
+KakaoLogin.propTypes = {
+  socialLogin: PropTypes.func,
+};
 export default KakaoLogin;

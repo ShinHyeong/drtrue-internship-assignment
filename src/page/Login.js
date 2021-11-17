@@ -5,8 +5,11 @@ import useInput from "../components/useInput";
 import oc from 'open-color';
 import { useUserState, useUserDispatch } from "../context/Users";
 import './SocialBox.css';
-import KakaoLogin from "../components/kakaoLogin";
+import KakaoLogin from "../components/KakaoLogin";
+import FacebookLogin from "../components/FacebookLogin";
+import Instagram  from "../components/InstagramLogin";
 
+//* STYLED_COMPONENTS
 const Aligner = styled.div`
 margin-top: 1rem;
 text-align: right;
@@ -87,6 +90,7 @@ function Login() {
   const { user } = useUserState();
   const dispatch = useUserDispatch();
 
+//*FUNCTIONS
   const onReset = useCallback(() => {
     setId("");
     setPwd("");
@@ -107,6 +111,7 @@ function Login() {
     onReset();
   };
 
+//*RENDER
 return (
       <>
       <form>
@@ -115,23 +120,23 @@ return (
         <form>
           <InputWithLabel label="아이디" id="user_id" value={id} onChange={onChangeId} placeholder="아이디를 입력하시오" required/>
           <InputWithLabel label="비밀번호" id="user_pwd" value={pwd} onChange={onChangePwd} placeholder="비밀번호를 입력하시오" required/>
-          <InputButton type="submit" onClick={onLogin}>로그인</InputButton>
+          <InputButton type="submit" onClick={onLogin}>LOGIN</InputButton>
           <div className="socialBox">
             <div className="kakao">
               <img className="kakaoLogo" src="img/kakao.png" />
-              <div className="kakaoText" onClick={KakaoLogin}>카카오 계정으로 로그인</div>
+              <KakaoLogin></KakaoLogin>
             </div>
             <div className="facebook">
               <img className="facebookLogo" src="img/facebook.png" />
-              <div className="facebookText">페이스북 계정으로 로그인</div>
-            </div>
+              <FacebookLogin></FacebookLogin>
+              </div>
             <div className="naver">
               <img className="naverLogo" src="img/naver.png" />
-              <div className="naverText">네이버 계정으로 로그인</div>
+              <div className="naverText">Login with Naver</div>
             </div>
             <div className="instagram">
               <img className="instagramLogo" src="img/instagram.png" />
-              <div className="instagramText">인스타그램 계정으로 로그인</div>
+              <Instagram></Instagram>
             </div>
           </div>
           <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
