@@ -23,6 +23,7 @@ const FaceBookLogin = ({ socialLogin }) => {
     socialLogin(userData);
   };
   return (
+    <>
     <FacebookLogin
       appId="3176754412608143"
       autoLoad={false}
@@ -34,6 +35,7 @@ const FaceBookLogin = ({ socialLogin }) => {
         </div>
       )}
     />
+    </>
   );
 };
 export default FaceBookLogin;

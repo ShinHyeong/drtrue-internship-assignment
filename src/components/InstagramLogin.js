@@ -1,26 +1,108 @@
-import React, { Component } from "react";
-import InstagramLogin, {style} from 'react-instagram-login';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types' // eslint-disable-line import/no-extraneous-dependencies
 
-class Instagram extends Component{
-    responseInstagram =(response)=> {
-        console.log(response);
-    }
+function getQueryVariable(variable) {
+  const query = window.location.search.substring(1)
+  const vars = query.split('&')
+  const code = vars
+    .map(i => {
+      const pair = i.split('=')
+      if (pair[0] === variable) {
+        return pair[1]
+      }
 
-    style = {
-        background: '#fff',
-    }
+      return null
+    })
+    .filter(d => {
+      if (d) {
+        return true
+      }
 
-    render(){
-        return (
-            <div>
-                <InstagramLogin
-                clientId="497169141577688"
-                buttonText="Login with Instagram"
-                onSuccess={this.responseInstagram}
-                onFailure={this.responseInstagram}
-              />
-            </div>
-        )
-    }
+      return false
+    })
+
+  return code[0]
 }
-export default Instagram;
+
+class InstagramLogin extends Component {
+  constructor(props) {
+    super(props)
+    this.onBtnClick = this.onBtnClick.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.implicitAuth) {
+      const matches = window.location.hash.match(/=(.*)/)
+      if (matches) {
+        this.props.onSuccess(matches[1])
+      }
+    } else if (window.location.search.includes('code')) {
+      this.props.onSuccess(getQueryVariable('code'))
+    } else if (window.location.search.includes('error')) {
+      this.props.onFailure({
+        error: getQueryVariable('error'),
+        error_reason: getQueryVariable('error_reason'),
+        error_description: getQueryVariable('error_description')
+      })
+    }
+  }
+
+  onBtnClick() {
+    const { clientId, scope } = this.props
+    const redirectUri = this.props.redirectUri || window.location.href
+    const responseType = this.props.implicitAuth ? 'token' : 'code'
+    window.location.href = `https://api.instagram.com/oauth/authorize/?app_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`
+  }
+
+  render() {
+    const style = {
+      display: 'inline-block',
+      background: 'linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)',
+      color: '#fff',
+      width: 200,
+      paddingTop: 12,
+      paddingBottom: 10,
+      border: '1px transparent',
+      fontSize: 16,
+      fontWeight: 'bold',
+      fontFamily: '"proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif',
+      cursor: 'pointer',
+    }
+    const { cssClass, buttonText, children, tag, type } = this.props
+    const instagramLoginButton = React.createElement(
+      tag,
+      {
+        className: cssClass,
+        onClick: this.onBtnClick,
+        style: cssClass ? {} : style,
+        type
+      },
+      children || buttonText
+    )
+
+    return instagramLoginButton
+  }
+}
+InstagramLogin.defaultProps = {
+  buttonText: 'Login with Instagram',
+  scope: 'basic',
+  tag: 'button',
+  type: 'button',
+  implicitAuth: false
+}
+
+InstagramLogin.propTypes = {
+  onSuccess: PropTypes.func.isRequired,
+  onFailure: PropTypes.func.isRequired,
+  clientId: PropTypes.string.isRequired,
+  buttonText: PropTypes.string,
+  scope: PropTypes.string,
+  cssClass: PropTypes.string,
+  children: PropTypes.node,
+  tag: PropTypes.string,
+  redirectUri: PropTypes.string,
+  type: PropTypes.string,
+  implicitAuth: PropTypes.bool
+}
+
+export default InstagramLogin

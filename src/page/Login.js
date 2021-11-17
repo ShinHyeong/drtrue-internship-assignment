@@ -1,13 +1,14 @@
 import React, {useCallback } from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import useInput from "../components/useInput";
 import oc from 'open-color';
+import useInput from "../components/useInput";
 import { useUserState, useUserDispatch } from "../context/Users";
 import './SocialBox.css';
 import KakaoLogin from "../components/KakaoLogin";
 import FacebookLogin from "../components/FacebookLogin";
-import Instagram  from "../components/InstagramLogin";
+import InstagramLogin  from "../components/InstagramLogin";
+import NaverLogin from "../components/NaverLogin";
 
 //* STYLED_COMPONENTS
 const Aligner = styled.div`
@@ -121,26 +122,24 @@ return (
           <InputWithLabel label="아이디" id="user_id" value={id} onChange={onChangeId} placeholder="아이디를 입력하시오" required/>
           <InputWithLabel label="비밀번호" id="user_pwd" value={pwd} onChange={onChangePwd} placeholder="비밀번호를 입력하시오" required/>
           <InputButton type="submit" onClick={onLogin}>LOGIN</InputButton>
+          <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
           <div className="socialBox">
+          <Wrapper /><Label>소셜 로그인</Label><Wrapper /><Wrapper />            
             <div className="kakao">
-              <img className="kakaoLogo" src="img/kakao.png" />
               <KakaoLogin></KakaoLogin>
             </div>
             <div className="facebook">
-              <img className="facebookLogo" src="img/facebook.png" />
               <FacebookLogin></FacebookLogin>
               </div>
             <div className="naver">
-              <img className="naverLogo" src="img/naver.png" />
-              <div className="naverText">Login with Naver</div>
+              <NaverLogin></NaverLogin>
             </div>
             <div className="instagram">
-              <img className="instagramLogo" src="img/instagram.png" />
-              <Instagram></Instagram>
+              <InstagramLogin></InstagramLogin>
             </div>
           </div>
-          <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
-        </form>
+          </form>
       </InputContainer>
       </form>
       </>
