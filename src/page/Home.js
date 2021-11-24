@@ -23,13 +23,11 @@ const RightAlignedButton = (children) => (
 const Home = () => {
   const { user } = useUserState();
   const dispatch = useUserDispatch();
-  console.log(user);
   const onLogOutHandler = () => {
     dispatch({
       type: "LOGOUT",
     });
     alert("로그아웃 되었습니다.");
-    console.log(user);
   };
   return (
     <div>

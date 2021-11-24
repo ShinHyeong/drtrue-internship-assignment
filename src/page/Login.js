@@ -90,7 +90,7 @@ const InputWithLabel = ({label, ...rest}) => (
 function Login() {
   const [id, onChangeId, setId] = useInput("");
   const [pwd, onChangePwd, setPwd] = useInput("");
-  const { user } = useUserState();
+  const { userList } = useUserState();
   const dispatch = useUserDispatch();
 
 //*FUNCTIONS
@@ -100,11 +100,22 @@ function Login() {
   }, [setId, setPwd]);
 
   const onLogin = () => {
-    if (!id || !pwd) {
-      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-      return;
+    var userNum = -1;
+    for(var i=0; i<userList.length; i++) {
+      if(userList[i].id == id)
+      userNum = i;
     }
 
+    if (userNum == -1) {
+      alert("등록되지 않은 회원입니다. 회원가입을 해주세요.");
+      return;
+    }
+    
+    if (userList[userNum].pwd != pwd) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    
     dispatch({
       type: "LOGIN",
       userId: id,
