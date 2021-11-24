@@ -1,10 +1,12 @@
 import React, {useCallback } from "react";
 import {Link} from "react-router-dom";
-import styled from "styled-components";
-import oc from 'open-color';
 import useInput from "../components/useInput";
 import { useUserState, useUserDispatch } from "../context/Users";
+
+import styled from "styled-components";
+import oc from 'open-color';
 import './SocialBox.css';
+
 import KakaoLogin from "../components/KakaoLogin";
 import FacebookLogin from "../components/FacebookLogin";
 import InstagramLogin  from "../components/InstagramLogin";

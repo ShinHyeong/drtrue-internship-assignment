@@ -4,12 +4,10 @@ import SiteInfo from "../SiteInfo";
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
 import oc from 'open-color';
-
 const Aligner = styled.div`
 margin-top: 1rem;
 text-align: right;
 `;
-
 const StyledText = styled.div`
 color: ${oc.gray[6]};
 &:hover {
@@ -17,37 +15,30 @@ color: ${oc.gray[6]};
 }
 cursor: pointer;
 `
-const RightAlignedButton = ({children}) => (
+const RightAlignedButton = (children) => (
 <Aligner>
-    <StyledText>{children}</StyledText>
+    <StyledText onClick={children.onLogOut}>{children.title}</StyledText>
 </Aligner>
 );
-
-
 const Home = () => {
   const { user } = useUserState();
   const dispatch = useUserDispatch();
   console.log(user);
-
-  const onLogOut = () => {
-
+  const onLogOutHandler = () => {
     dispatch({
       type: "LOGOUT",
     });
-
     alert("로그아웃 되었습니다.");
     console.log(user);
   };
-
   return (
     <div>
       <h3>{user.userId}님 환영합니다.</h3>
       <form>
-      <RightAlignedButton type="submit" onClick={onLogOut}>로그아웃</RightAlignedButton>
+      <RightAlignedButton onLogOut={onLogOutHandler} title = "로그아웃"></RightAlignedButton>
       <SiteInfo />
       </form>
     </div>
   );
 };
-
 export default Home;
