@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types' // eslint-disable-line import/no-extraneous-dependencies
+import { useUserState, useUserDispatch } from "../context/Users";
 
 function getQueryVariable(variable) {
+  
   const query = window.location.search.substring(1)
   const vars = query.split('&')
   const code = vars
@@ -10,14 +12,12 @@ function getQueryVariable(variable) {
       if (pair[0] === variable) {
         return pair[1]
       }
-
       return null
     })
     .filter(d => {
       if (d) {
         return true
       }
-
       return false
     })
 
@@ -25,6 +25,7 @@ function getQueryVariable(variable) {
 }
 
 class InstagramLogin extends Component {
+
   constructor(props) {
     super(props)
     this.onBtnClick = this.onBtnClick.bind(this)
@@ -46,7 +47,7 @@ class InstagramLogin extends Component {
       })
     }
   }
-
+  
   onBtnClick() {
     const { clientId, scope } = this.props
     const redirectUri = this.props.redirectUri || window.location.href
@@ -79,7 +80,7 @@ class InstagramLogin extends Component {
       },
       children || buttonText
     )
-
+    
     return instagramLoginButton
   }
 }

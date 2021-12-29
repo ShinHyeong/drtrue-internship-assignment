@@ -99,7 +99,7 @@ function Login() {
     setPwd("");
   }, [setId, setPwd]);
 
-  const onLogin = () => {
+   const onLogin = () => {
     var userNum = -1;
     for(var i=0; i<userList.length; i++) {
       if(userList[i].id == id)
@@ -123,8 +123,7 @@ function Login() {
 
     alert("로그인");
     onReset();
-  };
-
+  }
 //*RENDER
 return (
       <>
@@ -136,7 +135,6 @@ return (
           <InputWithLabel label="비밀번호" id="user_pwd" value={pwd} onChange={onChangePwd} placeholder="비밀번호를 입력하시오" required/>
           <InputButton type="submit" onClick={onLogin}>LOGIN</InputButton>
           <RightAlignedLink to="/signup" style={{textDecoration: 'none'}}>회원가입</RightAlignedLink>
-          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
           <div className="socialBox">
           <Wrapper /><Label>소셜 로그인</Label><Wrapper /><Wrapper />            
             <div className="kakao">
@@ -158,5 +156,4 @@ return (
       </>
   );
 }
-
 export default Login;
